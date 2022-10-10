@@ -3,6 +3,7 @@ package com.demo_jpa.controller;
 import com.demo_jpa.dao.ProductDao;
 import com.demo_jpa.entity.Product;
 import com.demo_jpa.entity.Product2;
+import com.demo_jpa.exceptionhandling.AnyCustomException;
 import com.demo_jpa.response.EmptyJsonBody;
 import com.demo_jpa.response.ResponseHandler;
 import com.demo_jpa.service.ProductService;
@@ -39,6 +40,9 @@ public class ProductController {
     @GetMapping("getprodbymanufacturerid/{id}")
     public ResponseEntity<Object> getProdByManuId(@PathVariable String id) {
         List<ProductDao.Test> products = productService.getProdsByManu(id);
+        if(products.isEmpty()){
+            throw new AnyCustomException("Does not exist");
+        }
         return ResponseHandler.generateResponse("Success", HttpStatus.OK, products);
     }
 
@@ -61,7 +65,7 @@ public class ProductController {
     }
 
     @GetMapping("doesprodexist/{name}")
-    public ResponseEntity<Object> doesProdExist(@PathVariable String name) {
+    public ResponseEntity<Object> doesProdExist(@PathVariable(required = true) String name ) {
 
         return productService.doesProductExist(name);
     }

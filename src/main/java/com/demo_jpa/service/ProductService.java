@@ -49,10 +49,9 @@ public class ProductService {
 
     public ResponseEntity<Object> doesProductExist(String name){
         Product p = productDao.doesProductExist(name);
-        if (p != null ){
-            return ResponseHandler.generateResponse("Success", HttpStatus.OK, p);
-        }
-         return ResponseHandler.generateResponse("Does not Exist", HttpStatus.MULTI_STATUS, null);
+
+        return ResponseHandler.generateResponse("Success", HttpStatus.OK, p);
+        // return ResponseHandler.generateResponse("Does not Exist", HttpStatus.MULTI_STATUS, null);
     }
     public List<Product2> getProdsNameAndId(){
         return productDao.getPNameAndId();
