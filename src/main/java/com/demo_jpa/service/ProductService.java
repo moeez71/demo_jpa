@@ -5,6 +5,8 @@ import com.demo_jpa.entity.Product;
 import com.demo_jpa.entity.Product2;
 import com.demo_jpa.response.ResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -17,12 +19,12 @@ public class ProductService {
     @Autowired
     private ProductDao productDao;
 
-
     public List<Product> getProd(){
         return productDao.findAll();
     }
 
     public Product getProdByName(String name){
+        System.out.println("got data by db");
         return productDao.findByProductName(name);
     }
 
@@ -33,11 +35,17 @@ public class ProductService {
     public void deleteProduct(int id){
         productDao.deleteById(id);
     }
-
     public Product updateProduct(int id, Product p2){
         Product p = productDao.findById(id).get();
         p.setProductName(p2.getProductName());
         //p.setManufacturer(p2.getManufacturer());
+        return productDao.save(p);
+
+    }
+    public Product updateProduct2(String name, Product p2){
+        Product p = productDao.findByProductName(name);
+        p.setProductName(p2.getProductName());
+        p.setManufacturer(p2.getManufacturer());
         return productDao.save(p);
 
     }

@@ -7,7 +7,11 @@ import com.demo_jpa.exceptionhandling.AnyCustomException;
 import com.demo_jpa.response.EmptyJsonBody;
 import com.demo_jpa.response.ResponseHandler;
 import com.demo_jpa.service.ProductService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,19 +20,24 @@ import java.util.List;
 
 @RestController
 public class ProductController {
+    public static Logger log = LoggerFactory.getLogger(ProductController.class);
+
     @Autowired
     private ProductService productService;
 
     @GetMapping("getprod")
     public ResponseEntity<Object> getProducts() {
         List<Product> products = productService.getProd();
+        log.info("products viewed");
         return ResponseHandler.generateResponse("Success", HttpStatus.OK, products);
     }
 
+
     @GetMapping("getprodbyname/{name}")
-    public ResponseEntity<Object> getProductByName(@PathVariable String name) {
+    public Object getProductByName(@PathVariable String name) {
         Product products = productService.getProdByName(name);
         return ResponseHandler.generateResponse("Success", HttpStatus.OK, products);
+        //return products;
     }
 
     @GetMapping("getprodbymanufacturername/{name}")
@@ -59,7 +68,7 @@ public class ProductController {
     }
 
     @PostMapping("saveprod")
-    public ResponseEntity<Object> deleteProd(@RequestBody Product p) {
+    public ResponseEntity<Object> saveProd(@RequestBody Product p) {
 
         return ResponseHandler.generateResponse("Success", HttpStatus.OK,   productService.addProduct(p));
     }
@@ -76,11 +85,18 @@ public class ProductController {
         return ResponseHandler.generateResponse("Success", HttpStatus.OK,   productService.updateProduct( id,  p2));
     }
 
+    @PostMapping("updateprod2/{name}")
+    public ResponseEntity<Object> updateProd2(@PathVariable String name, @RequestBody Product p2) {
+
+        return ResponseHandler.generateResponse("Success", HttpStatus.OK,   productService.updateProduct2( name,  p2));
+    }
+
     @DeleteMapping("deleteprod/{id}")
     public ResponseEntity<Object> deleteProd(@PathVariable int id) {
         productService.deleteProduct(id);
         return ResponseHandler.generateResponse("Success", HttpStatus.OK,   new EmptyJsonBody());
     }
+
 
 
 

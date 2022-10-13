@@ -4,6 +4,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
 @EnableWebMvc
 @SpringBootApplication
 @EnableSwagger2
+@EnableCaching
 public class DemoJpaApplication {
 
 	public static void main(String[] args) {
