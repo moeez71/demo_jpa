@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 public class Table3Controller {
     public static Logger log = LoggerFactory.getLogger(Table3Controller.class);
@@ -22,9 +24,11 @@ public class Table3Controller {
 
     @GetMapping("gettable3byid/{id}")
     public Object getTable3Record(@PathVariable Integer id) {
-        Table3 products = table3Service.getTable3Record(id);
-        return ResponseHandler.generateResponse("Success", HttpStatus.OK, products);
-        //return products;
+        Optional<Table3> products = table3Service.getTable3Record(id);
+        if (products.isPresent()){
+            return ResponseHandler.generateResponse("Success", HttpStatus.OK, products);
+    }//return products;
+    return null;
     }
 
 
@@ -40,6 +44,7 @@ public class Table3Controller {
         return ResponseHandler.generateResponse("Success", HttpStatus.OK,   table3Service.updateTable3Record(idtable3, p));
     }
 
+    // used to clear all cache values against table3
     @GetMapping("deletecachetable3")
     @CacheEvict(value = "table3", allEntries=true)
     public Boolean delCacheTable3() {
