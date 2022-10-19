@@ -90,6 +90,33 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
+<!--
+
+		<dependency>
+			<groupId>com.graphql-java-kickstart</groupId>
+			<artifactId>graphql-spring-boot-starter</artifactId>
+			<version>14.0.0</version>
+		</dependency>
+
+		&lt;!&ndash; testing facilities &ndash;&gt;
+		<dependency>
+			<groupId>com.graphql-java-kickstart</groupId>
+			<artifactId>graphql-spring-boot-starter-test</artifactId>
+			<version>14.0.0</version>
+			<scope>test</scope>
+		</dependency>
+-->
+		<!-- https://mvnrepository.com/artifact/com.graphql-java-kickstart/playground-spring-boot-starter -->
+		<dependency>
+			<groupId>com.graphql-java-kickstart</groupId>
+			<artifactId>playground-spring-boot-starter</artifactId>
+			<version>11.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.graphql</groupId>
+			<artifactId>spring-graphql</artifactId>
+			<version>1.0.1</version>
+		</dependency>
 
 
 	</dependencies>
