@@ -1,0 +1,33 @@
+type Query{
+
+    allTable4s:[Table4]
+    getTable4(entryId:Int):Table4
+}
+
+type Mutation{
+    createTable4(entry: TableInput):Table4
+    deleteEntry(id : Int): Boolean
+    updateTable(entry:UpdateTable):Table4
+}
+
+
+
+
+
+type Table4{
+    id:ID!
+    bool:Boolean
+    name:String
+}
+input TableInput{
+
+    bool:Boolean
+    name:String
+}
+
+input UpdateTable{
+    id:ID!
+    bool:Boolean
+    name:String
+
+}
