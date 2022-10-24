@@ -144,6 +144,7 @@
 
 
 		</plugins>
+		<finalName>spring-demo-jpa</finalName>
 	</build>
 
 </project>
