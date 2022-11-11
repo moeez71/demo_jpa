@@ -2,10 +2,8 @@ package com.demo_jpa.controller;
 
 import com.demo_jpa.entity.Table4;
 import com.demo_jpa.entity.TableInput;
-import com.demo_jpa.exceptionhandling.AnyCustomException;
 import com.demo_jpa.response.ResponseHandler;
 import com.demo_jpa.service.Table4Service;
-import graphql.kickstart.annotations.GraphQLQueryResolver;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Optional;
 
